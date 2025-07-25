@@ -12,7 +12,7 @@ import {
   redirect,
 } from "@remix-run/node";
 import { z } from "zod";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import {
   getUserIdFromSession,
   storeUserInSession,
@@ -63,7 +63,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       throw new Error("Invalid Credentials");
     }
 
-    const validPassword = await bcrypt.compare(
+    const validPassword = await bcryptjs.compare(
       valid.password,
       user.passwordHash
     );

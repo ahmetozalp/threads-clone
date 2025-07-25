@@ -6,7 +6,7 @@ import {
 } from "@remix-run/node";
 import { z } from "zod";
 
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import {
   createUser,
   isEmailTaken,
@@ -67,8 +67,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       throw new Error("Handle is already taken");
     }
 
-    const salt = await bcrypt.genSalt();
-    const passwordHash = await bcrypt.hash(valid.password, salt);
+    const salt = await bcryptjs.genSalt();
+    const passwordHash = await bcryptjs.hash(valid.password, salt);
 
     await createUser({
       email: valid.email,
